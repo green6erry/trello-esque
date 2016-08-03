@@ -49,45 +49,136 @@
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(35);
 	
-	var Person = function Person() {
-	    var name = 'Derek Zoolander';
-	    var imageUrl = 'http://uifaces.com/assets/static/images/zoolander.jpg';
-	    var job = 'Male model';
+	var Card1 = function Card1() {
+	    var name = 'Cheese';
+	    var imageUrl = 'http://kingofwallpapers.com/cheese/cheese-027.jpg';
+	    var category = 'Dairy';
 	    return React.createElement(
 	        'div',
-	        { className: 'person' },
+	        { className: 'card' },
 	        React.createElement(
 	            'div',
-	            { className: 'person-name' },
+	            { className: 'card-name' },
 	            name
 	        ),
-	        React.createElement('img', { className: 'person-img', src: imageUrl }),
+	        React.createElement('img', { className: 'card-img', src: imageUrl }),
 	        React.createElement(
 	            'div',
-	            { className: 'person-job' },
-	            job
+	            { className: 'card-category' },
+	            category
 	        )
 	    );
 	};
 	
-	var PersonList = React.createClass({
-	    displayName: 'PersonList',
+	var Card2 = function Card2() {
+	    var name = 'Pepper';
+	    var imageUrl = 'http://www.chefn.com/media/catalog/product/cache/1/image/1800x/040ec09b1e35df139433887a97daa66f/_/0/_0050_101-299-002_relishgrinderpepper_product_clear.jpg.jpg';
+	    var category = 'Spice';
+	    return React.createElement(
+	        'div',
+	        { className: 'card' },
+	        React.createElement(
+	            'div',
+	            { className: 'card-name' },
+	            name
+	        ),
+	        React.createElement('img', { className: 'card-img', src: imageUrl }),
+	        React.createElement(
+	            'div',
+	            { className: 'card-category' },
+	            category
+	        )
+	    );
+	};
+	
+	var Card3 = function Card3() {
+	    var name = 'Artichoke';
+	    var imageUrl = 'http://artichokes.org/caab-wp/wp-content/uploads/2012/10/home-artichoke.png';
+	    var category = 'Veggie';
+	    return React.createElement(
+	        'div',
+	        { className: 'card' },
+	        React.createElement(
+	            'div',
+	            { className: 'card-name' },
+	            name
+	        ),
+	        React.createElement('img', { className: 'card-img', src: imageUrl }),
+	        React.createElement(
+	            'div',
+	            { className: 'card-category' },
+	            category
+	        )
+	    );
+	};
+	
+	var Card4 = function Card4() {
+	    var name = 'Apple';
+	    var imageUrl = 'http://www.thebrandbite.com/wp-content/media/2015/07/apple-7.jpg';
+	    var category = 'Fruit';
+	    return React.createElement(
+	        'div',
+	        { className: 'card' },
+	        React.createElement(
+	            'div',
+	            { className: 'card-name' },
+	            name
+	        ),
+	        React.createElement('img', { className: 'card-img', src: imageUrl }),
+	        React.createElement(
+	            'div',
+	            { className: 'card-category' },
+	            category
+	        )
+	    );
+	};
+	
+	var List1 = function List1() {
+	    var name = 'Things to buy for thing';
+	    return React.createElement(
+	        'div',
+	        { className: 'card-list' },
+	        React.createElement(
+	            'div',
+	            { className: 'list-name' },
+	            name
+	        ),
+	        React.createElement(Card1, null),
+	        React.createElement(Card2, null)
+	    );
+	};
+	
+	var List2 = function List2() {
+	    var name = 'Things that Start with \'A\'';
+	    return React.createElement(
+	        'div',
+	        { className: 'card-list' },
+	        React.createElement(
+	            'div',
+	            { className: 'list-name' },
+	            name
+	        ),
+	        React.createElement(Card3, null),
+	        React.createElement(Card4, null)
+	    );
+	};
+	
+	var ListBoard = React.createClass({
+	    displayName: 'ListBoard',
 	
 	    render: function render() {
-	        var people = [];
-	        for (var i = 0; i < 5; i++) {
-	            people.push(React.createElement(Person, null));
-	        }
+	        var lists = [React.createElement(List1, null), React.createElement(List2, null)];
+	
 	        return React.createElement(
 	            'div',
-	            { className: 'person-list' },
-	            people
+	            { className: 'list-board' },
+	            lists
 	        );
 	    }
 	});
 	
 	document.addEventListener('DOMContentLoaded', function () {
-	    ReactDOM.render(React.createElement(PersonList, null), document.getElementById('app'));
+	    ReactDOM.render(React.createElement(ListBoard, null), document.getElementById('app'));
 	});
 
 /***/ },
