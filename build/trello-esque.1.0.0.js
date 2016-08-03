@@ -49,92 +49,41 @@
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(35);
 	
-	var Card1 = function Card1() {
-	    var name = 'Cheese';
-	    var imageUrl = 'http://kingofwallpapers.com/cheese/cheese-027.jpg';
-	    var category = 'Dairy';
-	    return React.createElement(
-	        'div',
-	        { className: 'card' },
-	        React.createElement(
-	            'div',
-	            { className: 'card-name' },
-	            name
-	        ),
-	        React.createElement('img', { className: 'card-img', src: imageUrl }),
-	        React.createElement(
-	            'div',
-	            { className: 'card-category' },
-	            category
-	        )
-	    );
-	};
+	var Card = React.createClass({
+	    displayName: 'Card',
 	
-	var Card2 = function Card2() {
-	    var name = 'Pepper';
-	    var imageUrl = 'http://www.chefn.com/media/catalog/product/cache/1/image/1800x/040ec09b1e35df139433887a97daa66f/_/0/_0050_101-299-002_relishgrinderpepper_product_clear.jpg.jpg';
-	    var category = 'Spice';
-	    return React.createElement(
-	        'div',
-	        { className: 'card' },
-	        React.createElement(
+	    getInitialState: function getInitialState() {
+	        return {
+	            highlight: false
+	        };
+	    },
+	    onClick: function onClick() {
+	        this.setState({
+	            highlight: !this.state.highlight
+	        });
+	    },
+	    render: function render() {
+	        var classes = 'card ' + (this.state.highlight ? 'highlight' : '');
+	        return React.createElement(
 	            'div',
-	            { className: 'card-name' },
-	            name
-	        ),
-	        React.createElement('img', { className: 'card-img', src: imageUrl }),
-	        React.createElement(
-	            'div',
-	            { className: 'card-category' },
-	            category
-	        )
-	    );
-	};
-	
-	var Card3 = function Card3() {
-	    var name = 'Artichoke';
-	    var imageUrl = 'http://artichokes.org/caab-wp/wp-content/uploads/2012/10/home-artichoke.png';
-	    var category = 'Veggie';
-	    return React.createElement(
-	        'div',
-	        { className: 'card' },
-	        React.createElement(
-	            'div',
-	            { className: 'card-name' },
-	            name
-	        ),
-	        React.createElement('img', { className: 'card-img', src: imageUrl }),
-	        React.createElement(
-	            'div',
-	            { className: 'card-category' },
-	            category
-	        )
-	    );
-	};
-	
-	var Card4 = function Card4() {
-	    var name = 'Apple';
-	    var imageUrl = 'http://www.thebrandbite.com/wp-content/media/2015/07/apple-7.jpg';
-	    var category = 'Fruit';
-	    return React.createElement(
-	        'div',
-	        { className: 'card' },
-	        React.createElement(
-	            'div',
-	            { className: 'card-name' },
-	            name
-	        ),
-	        React.createElement('img', { className: 'card-img', src: imageUrl }),
-	        React.createElement(
-	            'div',
-	            { className: 'card-category' },
-	            category
-	        )
-	    );
-	};
+	            { className: classes, onClick: this.onClick },
+	            React.createElement(
+	                'div',
+	                { className: 'card-name' },
+	                this.props.name
+	            ),
+	            React.createElement('img', { className: 'card-img', src: this.props.imageUrl }),
+	            React.createElement(
+	                'div',
+	                { className: 'card-category' },
+	                this.props.category
+	            )
+	        );
+	    }
+	});
 	
 	var List1 = function List1() {
-	    var name = 'Things to buy for thing';
+	    var name = "Things that thing";
 	    return React.createElement(
 	        'div',
 	        { className: 'card-list' },
@@ -143,13 +92,24 @@
 	            { className: 'list-name' },
 	            name
 	        ),
-	        React.createElement(Card1, null),
-	        React.createElement(Card2, null)
+	        React.createElement(Card, { name: 'Artichoke',
+	            imageUrl: 'http://artichokes.org/caab-wp/wp-content/uploads/2012/10/home-artichoke.png',
+	            category: 'Veggie' }),
+	        React.createElement(Card, { name: 'Cheese',
+	            imageUrl: 'http://kingofwallpapers.com/cheese/cheese-027.jpg',
+	            category: 'Dairy' }),
+	        React.createElement(Card, { name: 'Apple',
+	            imageUrl: 'http://www.thebrandbite.com/wp-content/media/2015/07/apple-7.jpg',
+	            category: 'Fruit' }),
+	        React.createElement(Card, { name: 'Pepper',
+	            imageUrl: 'http://www.chefn.com/media/catalog/product/cache/1/image/1800x/040ec09b1e35df139433887a97daa66f/_/0/_0050_101-299-002_relishgrinderpepper_product_clear.jpg.jpg',
+	            category: 'Spice' })
 	    );
 	};
 	
 	var List2 = function List2() {
-	    var name = 'Things that Start with \'A\'';
+	    var name = "Things that start with 'A'";
+	
 	    return React.createElement(
 	        'div',
 	        { className: 'card-list' },
@@ -158,8 +118,12 @@
 	            { className: 'list-name' },
 	            name
 	        ),
-	        React.createElement(Card3, null),
-	        React.createElement(Card4, null)
+	        React.createElement(Card, { name: 'Artichoke',
+	            imageUrl: 'http://artichokes.org/caab-wp/wp-content/uploads/2012/10/home-artichoke.png',
+	            category: 'Veggie' }),
+	        React.createElement(Card, { name: 'Apple',
+	            imageUrl: 'http://www.thebrandbite.com/wp-content/media/2015/07/apple-7.jpg',
+	            category: 'Fruit' })
 	    );
 	};
 	
