@@ -82,67 +82,160 @@
 	    }
 	});
 	
-	var List1 = function List1() {
-	    var name = "Things that thing";
+	var Input = function Input(props) {
 	    return React.createElement(
-	        'div',
-	        { className: 'card-list' },
-	        React.createElement(
-	            'div',
-	            { className: 'list-name' },
-	            name
-	        ),
-	        React.createElement(Card, { name: 'Artichoke',
-	            imageUrl: 'http://artichokes.org/caab-wp/wp-content/uploads/2012/10/home-artichoke.png',
-	            category: 'Veggie' }),
-	        React.createElement(Card, { name: 'Cheese',
-	            imageUrl: 'http://kingofwallpapers.com/cheese/cheese-027.jpg',
-	            category: 'Dairy' }),
-	        React.createElement(Card, { name: 'Apple',
-	            imageUrl: 'http://www.thebrandbite.com/wp-content/media/2015/07/apple-7.jpg',
-	            category: 'Fruit' }),
-	        React.createElement(Card, { name: 'Pepper',
-	            imageUrl: 'http://www.chefn.com/media/catalog/product/cache/1/image/1800x/040ec09b1e35df139433887a97daa66f/_/0/_0050_101-299-002_relishgrinderpepper_product_clear.jpg.jpg',
-	            category: 'Spice' })
+	        'span',
+	        null,
+	        React.createElement('input', { onChange: props.onChange, placeholder: props.text })
 	    );
 	};
 	
-	var List2 = function List2() {
-	    var name = "Things that start with 'A'";
-	
+	var Button = function Button(props) {
 	    return React.createElement(
-	        'div',
-	        { className: 'card-list' },
-	        React.createElement(
-	            'div',
-	            { className: 'list-name' },
-	            name
-	        ),
-	        React.createElement(Card, { name: 'Artichoke',
-	            imageUrl: 'http://artichokes.org/caab-wp/wp-content/uploads/2012/10/home-artichoke.png',
-	            category: 'Veggie' }),
-	        React.createElement(Card, { name: 'Apple',
-	            imageUrl: 'http://www.thebrandbite.com/wp-content/media/2015/07/apple-7.jpg',
-	            category: 'Fruit' })
+	        'button',
+	        { onClick: props.onClick },
+	        props.text
 	    );
 	};
 	
-	var ListBoard = React.createClass({
-	    displayName: 'ListBoard',
+	//component
+	var List = React.createClass({
+	    displayName: 'List',
+	
+	    getInitialState: function getInitialState() {
+	        console.log('begin');
+	        return {
+	            clicked: false
+	        };
+	    },
+	    //callback
+	    onAddInputChanged: function onAddInputChanged() {
+	        console.log('input changed');
+	        this.setState({
+	            clicked: true //callback for onBAddInputChanged
+	        });
+	    },
+	
+	    onAddClick: function onAddClick() {
+	        console.log('button clicked');
+	        this.setState({
+	            clicked: true //callback for onAddClick
+	        });
+	    },
 	
 	    render: function render() {
-	        var lists = [React.createElement(List1, null), React.createElement(List2, null)];
-	
+	        var name = this.props.name;
+	        var cards = this.props.cards;
 	        return React.createElement(
 	            'div',
-	            { className: 'list-board' },
+	            { className: 'list' },
+	            React.createElement(
+	                'div',
+	                { className: 'list-name' },
+	                name
+	            ),
+	            cards,
+	            React.createElement(Input, { onChange: this.onAddInputChanged, text: 'Type stuff to me!' }),
+	            React.createElement(Button, { onClick: this.onAddClick, text: 'Click!' })
+	        );
+	    }
+	});
+	
+	var Board = React.createClass({
+	    displayName: 'Board',
+	
+	    render: function render() {
+	        var name = this.props.name;
+	        var lists = this.props.lists;
+	        return React.createElement(
+	            'div',
+	            { className: 'board' },
+	            React.createElement(
+	                'div',
+	                { className: 'board-name' },
+	                name
+	            ),
 	            lists
 	        );
 	    }
 	});
 	
+	var List1 = function List1() {
+	    var name = "Things that thing";
+	    var cards = [React.createElement(Card, { name: 'Cheese',
+	        imageUrl: 'http://kingofwallpapers.com/cheese/cheese-027.jpg',
+	        category: 'Dairy' }), React.createElement(Card, { name: 'Pepper',
+	        imageUrl: 'http://www.chefn.com/media/catalog/product/cache/1/image/1800x/040ec09b1e35df139433887a97daa66f/_/0/_0050_101-299-002_relishgrinderpepper_product_clear.jpg.jpg',
+	        category: 'Spice' })];
+	    return React.createElement(
+	        'div',
+	        { className: 'card-list' },
+	        React.createElement(List, { name: name, cards: cards })
+	    );
+	};
+	
+	// var List2 = function() {
+	//     var name = "Things that start with 'A'";
+	//     var cards = [<Card name="Artichoke"
+	//                     imageUrl="http://artichokes.org/caab-wp/wp-content/uploads/2012/10/home-artichoke.png"
+	//                     category="Veggie" />, 
+	//                 <Card name="Apple"
+	//                     imageUrl="http://www.thebrandbite.com/wp-content/media/2015/07/apple-7.jpg"
+	//                     category="Fruit" />]
+	//     return (
+	//         <div className="card-list">
+	//             <List name={name} cards={cards} />
+	
+	//         </div>
+	//     );
+	// };
+	
+	
+	var Board1 = function Board1() {
+	    var lists = [React.createElement(List1, null)];
+	    return React.createElement(
+	        'div',
+	        { className: 'board' },
+	        React.createElement(Board, { name: 'I am the board', lists: lists })
+	    );
+	};
+	
+	// var List2 = function() {
+	//     var name = "Things that start with 'A'";
+	
+	//     return (
+	//         <div className="list-name">{name}</div>
+	//             <div className="card-list">
+	//             <Card name="Artichoke"
+	//                     imageUrl="http://artichokes.org/caab-wp/wp-content/uploads/2012/10/home-artichoke.png"
+	//                     category="Veggie" />
+	//             <Card name="Cheese"
+	//                     imageUrl="http://kingofwallpapers.com/cheese/cheese-027.jpg"
+	//                     category="Dairy" />
+	//             <Card name="Apple"
+	//                     imageUrl="http://www.thebrandbite.com/wp-content/media/2015/07/apple-7.jpg"
+	//                     category="Fruit" />
+	//             <Card name="Pepper"
+	//                     imageUrl="http://www.chefn.com/media/catalog/product/cache/1/image/1800x/040ec09b1e35df139433887a97daa66f/_/0/_0050_101-299-002_relishgrinderpepper_product_clear.jpg.jpg"
+	//                     category="Spice" />
+	//         </div>
+	//     );
+	// };
+	
+	// var ListBoard = React.createClass({
+	//     render: function() {
+	//         var lists = [<List1 />, <List2 />];
+	//         return (
+	//             <div className="list-board">
+	//                 {lists}
+	//             </div>
+	//         );
+	//     }
+	// });
+	
+	
 	document.addEventListener('DOMContentLoaded', function () {
-	    ReactDOM.render(React.createElement(ListBoard, null), document.getElementById('app'));
+	    ReactDOM.render(React.createElement(Board1, null), document.getElementById('app'));
 	});
 
 /***/ },
